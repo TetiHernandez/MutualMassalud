@@ -72,7 +72,6 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         btDesactivar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
         btSalir1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(100, 160, 173));
@@ -187,11 +186,6 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lorenzo\\Downloads\\doctor (1).png")); // NOI18N
-        jLabel3.setText("jLabel3");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lorenzo\\Downloads\\nombre.png")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,11 +240,9 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                                         .addComponent(cbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(192, 192, 192))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(136, Short.MAX_VALUE)
+                .addContainerGap(195, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(174, 174, 174))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -262,15 +254,9 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel1)
-                                .addGap(28, 28, 28))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -297,7 +283,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                     .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cbActivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btActualizar)
@@ -307,8 +293,6 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                 .addComponent(btSalir1)
                 .addContainerGap())
         );
-
-        jLabel3.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,22 +306,28 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         Especialidad especialidad;
         
         Prestador p;
-        idPrestador = Integer.parseInt(tIdPrestador.getText());
-        p = pd.buscarPrestador(idPrestador);
-        
-        nombre = p.getNombre();
-        apellido = p.getApellido();
-        dni = p.getDni();
-        activo = p.isActivo();
-        especialidad = p.getEspecialidad();
-        
-        tNombrePrestador.setText(nombre);
-        tApellidoPrestador.setText(apellido);
-        tDniPrestador.setText(dni + "");        
-        cbActivo.setSelected(activo);
-        
-        cbEspecialidad.setSelectedIndex(especialidad.getIdEspecialidad() - 1);
-   
+        if(tDniPrestador.getText() != null){
+            dni = Integer.parseInt(tDniPrestador.getText());
+//        idPrestador = Integer.parseInt(tIdPrestador.getText());
+            p = pd.buscarPrestadorPorDni(dni);
+
+            idPrestador = p.getIdPrestador();
+            nombre = p.getNombre();
+            apellido = p.getApellido();
+            dni = p.getDni();
+            activo = p.isActivo();
+            especialidad = p.getEspecialidad();
+
+            tIdPrestador.setText(idPrestador + "");
+            tNombrePrestador.setText(nombre);
+            tApellidoPrestador.setText(apellido);
+            tDniPrestador.setText(dni + "");        
+            cbActivo.setSelected(activo);
+
+            cbEspecialidad.setSelectedIndex(especialidad.getIdEspecialidad() - 1);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Ingrese un dni correcto");
+        }
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void tIdPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tIdPrestadorActionPerformed
@@ -403,7 +393,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         if(tDniPrestador.getText().length()>=limite){
             evt.consume();
         }
-        btGuardar.setEnabled(true);
+        
          
     }//GEN-LAST:event_tDniPrestadorKeyTyped
 
@@ -518,7 +508,6 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Especialidad> cbEspecialidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

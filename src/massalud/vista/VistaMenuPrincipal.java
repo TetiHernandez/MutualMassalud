@@ -309,7 +309,7 @@ public class VistaMenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        VistaAdministrarAfiliado vAdministrarAfiliado = new VistaAdministrarAfiliado();
+        VistaAdministrarAfiliados vAdministrarAfiliado = new VistaAdministrarAfiliados();
         vAdministrarAfiliado.setVisible(true);
         escritorio.add(vAdministrarAfiliado);
         escritorio.moveToFront(vAdministrarAfiliado);

@@ -5,8 +5,10 @@
  */
 package massalud.vista;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import massalud.controlador.AfiliadoData;
 import massalud.controlador.Conexion;
 import massalud.controlador.EspecialidadData;
@@ -17,7 +19,7 @@ import massalud.modelo.Afiliado;
  *
  * @author tetid
  */
-public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
+public class VistaAdministrarAfiliados extends javax.swing.JInternalFrame {
     
     private Conexion conexion;
     private AfiliadoData ad;
@@ -25,7 +27,7 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaAdministrarAfiliado
      */
-    public VistaAdministrarAfiliado() {
+    public VistaAdministrarAfiliados() {
         initComponents();
         
         try {
@@ -62,6 +64,8 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         btBuscarPorDni = new javax.swing.JButton();
         btSalir1 = new javax.swing.JButton();
+
+        setTitle("Administrar afiliado");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Administrar Afiliado");
@@ -117,6 +121,11 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Id Afiliado:");
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
 
         tIdAfiliado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +133,9 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
             }
         });
         tIdAfiliado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tIdAfiliadoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tIdAfiliadoKeyTyped(evt);
             }
@@ -138,6 +150,9 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
             }
         });
         tNombreAfiliado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tNombreAfiliadoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tNombreAfiliadoKeyTyped(evt);
             }
@@ -152,6 +167,9 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
             }
         });
         tApellidoAfiliado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tApellidoAfiliadoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tApellidoAfiliadoKeyTyped(evt);
             }
@@ -269,34 +287,58 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
 
     private void tDniAfiliadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDniAfiliadoKeyTyped
         char myChar = evt.getKeyChar();
-
+        int limite  = 8;
+        
         if(!Character.isDigit(myChar)){
+            evt.consume();
+        }
+ 
+        if(tDniAfiliado.getText().length()>=limite){
             evt.consume();
         }
     }//GEN-LAST:event_tDniAfiliadoKeyTyped
 
     private void btCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearActionPerformed
 
+       
         int idAfiliado;
         String nombre;
         String apellido;
         int dni;
         boolean activo;
-        
-
         Afiliado a;
-
+ 
+ 
+              if(tIdAfiliado.getText().isEmpty()||tNombreAfiliado.getText().isEmpty()||tApellidoAfiliado.getText().isEmpty()||tDniAfiliado.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Complete los datos solicitados");
+        
+         }
+         else {
+        
         nombre = tNombreAfiliado.getText();
         apellido = tApellidoAfiliado.getText();
         dni = Integer.parseInt(tDniAfiliado.getText());
         activo = cbActivo.isSelected();
-
+                   
         a = new Afiliado(nombre, apellido, dni, activo);
         ad.agregarAfiliado(a);
 
         tIdAfiliado.setText(a.getIdAfiliado() + "");
-    }//GEN-LAST:event_btCrearActionPerformed
+                JOptionPane.showMessageDialog(null, "Se ha creado al afiliado");
 
+        }
+         
+    }//GEN-LAST:event_btCrearActionPerformed
+ 
+    public void habilitarBotonCrear(){
+     //pregunta si todos loa campos estan comletos         
+   if(!tIdAfiliado.getText().isEmpty()&&!tNombreAfiliado.getText().isEmpty()&&!tApellidoAfiliado.getText().isEmpty()&&!tDniAfiliado.getText().isEmpty()){
+   btCrear.setEnabled(true); //habilita el boton
+   
+   }
+  }
+ 
+ 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
         int idAfiliado;
         String nombre;
@@ -305,7 +347,20 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
         boolean activo;        
 
         Afiliado a;
-
+        
+        tIdAfiliado.setEnabled(true);
+        tNombreAfiliado.setEnabled(true);
+        tApellidoAfiliado.setEnabled(true);
+        tDniAfiliado.setEnabled(true);
+        
+        
+        
+              if(tIdAfiliado.getText().isEmpty()||tNombreAfiliado.getText().isEmpty()||tApellidoAfiliado.getText().isEmpty()||tDniAfiliado.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Faltan datos para actualizar el afiliado");
+        
+         }
+         else {
+        
         if(tIdAfiliado.getText() != null && tNombreAfiliado.getText() != null && tApellidoAfiliado.getText() != null && tDniAfiliado.getText() != null && (tDniAfiliado.getText().length() >= 7 && tDniAfiliado.getText().length() <= 8)){
             idAfiliado = Integer.parseInt(tIdAfiliado.getText());
             nombre = tNombreAfiliado.getText();
@@ -318,6 +373,9 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
 
             ad.actualizarAfiliado(a);
         }
+                    JOptionPane.showMessageDialog(null, "Se actualizo correctamente al afiliado");
+
+              }
     }//GEN-LAST:event_btActualizarActionPerformed
 
     private void btDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesactivarActionPerformed
@@ -342,6 +400,13 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btDesactivarActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+
+        tIdAfiliado.setEnabled(true);
+        tNombreAfiliado.setEnabled(true);
+        tApellidoAfiliado.setEnabled(true);
+        tDniAfiliado.setEnabled(true);
+        
+        
         tIdAfiliado.setText("");
         tNombreAfiliado.setText("");
         tApellidoAfiliado.setText("");
@@ -440,8 +505,57 @@ public class VistaAdministrarAfiliado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btBuscarPorDniActionPerformed
 
     private void btSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalir1ActionPerformed
-        dispose();
+      int confirmar = JOptionPane.showConfirmDialog(null, "¿Desea salir?");
+
+if(confirmar==JOptionPane.YES_NO_OPTION){
+
+dispose();
+
+}
+        
     }//GEN-LAST:event_btSalir1ActionPerformed
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+
+    
+    
+// TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void tIdAfiliadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tIdAfiliadoKeyPressed
+if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+tNombreAfiliado.requestFocus();
+tIdAfiliado.setEnabled(false);
+tNombreAfiliado.setEnabled(true);
+tApellidoAfiliado.setEnabled(false);
+tDniAfiliado.setEnabled(false);
+}
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_tIdAfiliadoKeyPressed
+
+    private void tNombreAfiliadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreAfiliadoKeyPressed
+if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+tApellidoAfiliado.requestFocus();
+tIdAfiliado.setEnabled(false);
+tNombreAfiliado.setEnabled(false);
+tApellidoAfiliado.setEnabled(true);
+tDniAfiliado.setEnabled(false);
+}   
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_tNombreAfiliadoKeyPressed
+
+    private void tApellidoAfiliadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tApellidoAfiliadoKeyPressed
+if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+
+tDniAfiliado.requestFocus();
+tIdAfiliado.setEnabled(false);
+tNombreAfiliado.setEnabled(false);
+tApellidoAfiliado.setEnabled(false);
+tDniAfiliado.setEnabled(true);
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_tApellidoAfiliadoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

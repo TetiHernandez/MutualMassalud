@@ -92,7 +92,44 @@ public class PrestadorData {
             
             
         } catch (SQLException ex) {
-            System.out.println("Error al buscar un alumno: " + ex.getMessage());
+            System.out.println("Error al buscar el prestador: " + ex.getMessage());
+        }
+        
+        return prestador;
+    }
+    
+    public Prestador buscarPrestadorPorDni(int dniPrestador) {
+        Prestador prestador = null;
+        
+        try {
+            
+            String sql = "SELECT * FROM prestador WHERE dni =?;";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, dniPrestador);
+           
+            
+            ResultSet resultSet=ps.executeQuery();
+            
+            if(resultSet.next()){
+                prestador = new Prestador();
+                prestador.setIdPrestador(resultSet.getInt("idPrestador"));
+                prestador.setNombre(resultSet.getString("nombre"));
+                prestador.setApellido(resultSet.getString("apellido"));
+                prestador.setDni(resultSet.getInt("dni"));
+                prestador.setActivo(resultSet.getBoolean("activo"));
+                
+                Especialidad e = buscarEspecialidad(resultSet.getInt("idEspecialidad"));
+                prestador.setEspecialidad(e);
+
+                
+            }
+         
+            ps.close();
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar el prestador: " + ex.getMessage());
         }
         
         return prestador;
