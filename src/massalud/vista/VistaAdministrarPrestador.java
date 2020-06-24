@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import massalud.controlador.Conexion;
 import massalud.controlador.EspecialidadData;
 import massalud.controlador.PrestadorData;
@@ -71,6 +72,10 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         btDesactivar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
         btSalir1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(100, 160, 173));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Administrar Prestador");
@@ -85,6 +90,8 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Id Prestador:");
 
+        tIdPrestador.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        tIdPrestador.setEnabled(false);
         tIdPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tIdPrestadorActionPerformed(evt);
@@ -141,6 +148,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Especialidad:");
 
+        cbActivo.setBackground(new java.awt.Color(100, 160, 173));
         cbActivo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbActivo.setText("Activo");
 
@@ -179,6 +187,11 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lorenzo\\Downloads\\doctor (1).png")); // NOI18N
+        jLabel3.setText("jLabel3");
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Lorenzo\\Downloads\\nombre.png")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,31 +200,12 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tDniPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cbActivo)
-                                                .addGap(114, 114, 114))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(46, 46, 46)
-                                                .addComponent(cbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                                .addGap(58, 58, 58))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btGuardar)
-                                .addGap(28, 28, 28)
-                                .addComponent(btActualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btDesactivar)
-                                .addGap(30, 30, 30)))
+                        .addComponent(btGuardar)
+                        .addGap(28, 28, 28)
+                        .addComponent(btActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btDesactivar)
+                        .addGap(30, 30, 30)
                         .addComponent(btLimpiar)
                         .addGap(69, 69, 69))
                     .addGroup(layout.createSequentialGroup()
@@ -225,16 +219,38 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(tNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btBuscar)
-                        .addGap(113, 113, 113))))
+                        .addGap(105, 105, 105))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tDniPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbActivo)
+                                        .addGap(114, 114, 114))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(cbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGap(192, 192, 192))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(136, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel1)
                         .addGap(174, 174, 174))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -244,18 +260,30 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel1)
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btBuscar, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -269,7 +297,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                     .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(cbActivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btActualizar)
@@ -279,6 +307,8 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
                 .addComponent(btSalir1)
                 .addContainerGap())
         );
+
+        jLabel3.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -328,10 +358,16 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
 
     private void tNombrePrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombrePrestadorKeyTyped
         char myChar = evt.getKeyChar();
-
+        String nTexto = tNombrePrestador.getText();
         if(Character.isDigit(myChar)){
             evt.consume();
         }
+        if(nTexto.length()>0){
+            char pLetra = nTexto.charAt(0);
+            nTexto= Character.toUpperCase(pLetra)+nTexto.substring(1, nTexto.length());
+            tNombrePrestador.setText(nTexto);
+        }     
+        
     }//GEN-LAST:event_tNombrePrestadorKeyTyped
 
     private void tApellidoPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tApellidoPrestadorActionPerformed
@@ -344,6 +380,15 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
         if(Character.isDigit(myChar)){
             evt.consume();
         }
+               
+        String nTexto = tApellidoPrestador.getText();
+        
+        if(nTexto.length()>0){
+            char pLetra = nTexto.charAt(0);
+            nTexto= Character.toUpperCase(pLetra)+nTexto.substring(1, nTexto.length());
+            tApellidoPrestador.setText(nTexto);
+        }
+        tDniPrestador.setEnabled(true);
     }//GEN-LAST:event_tApellidoPrestadorKeyTyped
 
     private void tDniPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tDniPrestadorActionPerformed
@@ -352,38 +397,47 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
 
     private void tDniPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tDniPrestadorKeyTyped
         char myChar = evt.getKeyChar();
-
+        int limite  = 8;
         if(!Character.isDigit(myChar)){
+            evt.consume();}
+        if(tDniPrestador.getText().length()>=limite){
             evt.consume();
         }
+        btGuardar.setEnabled(true);
+         
     }//GEN-LAST:event_tDniPrestadorKeyTyped
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
 
+        
         int idPrestador;
-        String nombre;
+        String nombre = null;
         String apellido;
         int dni;        
         boolean activo;
         Especialidad especialidad;
         
 
-        Prestador p;
-
-        nombre = tNombrePrestador.getText();
-        apellido = tApellidoPrestador.getText();
-        dni = Integer.parseInt(tDniPrestador.getText());
-        especialidad = (Especialidad)cbEspecialidad.getSelectedItem();
-        activo = cbActivo.isSelected();        
+    
+      Prestador p;
+    if(tNombrePrestador.getText().isEmpty()||tApellidoPrestador.getText().isEmpty()||tDniPrestador.getText().isEmpty()){
+         JOptionPane.showMessageDialog(rootPane, "Complete los datos solicitados");
+     } else{
+     nombre = tNombrePrestador.getText();
+     apellido = tApellidoPrestador.getText();
+     dni = Integer.parseInt(tDniPrestador.getText());
+     especialidad = (Especialidad)cbEspecialidad.getSelectedItem();
+     activo = cbActivo.isSelected();        
         
-        p = new Prestador(nombre, apellido, dni, activo, especialidad);
-        pd.agregarPrestador(p);
+     p = new Prestador(nombre, apellido, dni, activo, especialidad);
+     pd.agregarPrestador(p);
 
-        tIdPrestador.setText(p.getIdPrestador() + "");
+     tIdPrestador.setText(p.getIdPrestador() + "");
+     JOptionPane.showMessageDialog(rootPane, "Se creo Prestador");}
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
-        int idPrestador;
+       int idPrestador;
         String nombre;
         String apellido;
         int dni;        
@@ -392,7 +446,9 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
 
         Prestador p;
 
-        if(tIdPrestador.getText() != null && tNombrePrestador.getText() != null && tApellidoPrestador.getText() != null && tDniPrestador.getText() != null && (tDniPrestador.getText().length() >= 7 && tDniPrestador.getText().length() <= 8)){
+        if(tNombrePrestador.getText().isEmpty()||tApellidoPrestador.getText().isEmpty()||tDniPrestador.getText().isEmpty()){
+         JOptionPane.showMessageDialog(rootPane, "Complete los datos solicitados");
+        } else{  
             idPrestador = Integer.parseInt(tIdPrestador.getText());
             nombre = tNombrePrestador.getText();
             apellido = tApellidoPrestador.getText();
@@ -405,6 +461,7 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
             p.setIdPrestador(idPrestador);
 
             pd.actualizarPrestador(p);
+            JOptionPane.showMessageDialog(rootPane, "Datos Actualizados");
         }
 
     }//GEN-LAST:event_btActualizarActionPerformed
@@ -456,16 +513,17 @@ public class VistaAdministrarPrestador extends javax.swing.JInternalFrame {
     private javax.swing.JButton btDesactivar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btLimpiar;
-    private javax.swing.JButton btSalir;
     private javax.swing.JButton btSalir1;
     private javax.swing.JCheckBox cbActivo;
     private javax.swing.JComboBox<Especialidad> cbEspecialidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField tApellidoPrestador;
     private javax.swing.JTextField tDniPrestador;
     private javax.swing.JTextField tIdPrestador;
